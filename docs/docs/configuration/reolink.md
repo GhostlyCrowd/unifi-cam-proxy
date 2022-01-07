@@ -39,5 +39,6 @@ unifi-cam-proxy -H <NVR IP> -i <camera IP> -c client.pem -t <Adoption token> \
     reolink \
     -u {username} \
     -p {password} \
+    -s {substream} \
     --ffmpeg-args '-c:v copy -vbsf "h264_metadata=tick_rate=60000/1001" -ar 32000 -ac 1 -codec:a aac -b:a 32k'
 ```
