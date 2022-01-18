@@ -26,7 +26,7 @@ class Reolink(UnifiCamBase):
             "--channel",
             "-c",
             default=0,
-            help="Camera channel (not needed, leaving for possible future)",
+            help="Camera channel (default 0, used for API motion det.)",
         )
 
         parser.add_argument(
@@ -34,9 +34,9 @@ class Reolink(UnifiCamBase):
             "-s",
             default="main",
             type=str,
-            choices=["main", "sub"],
+            choices=["main", "sub", "ext"],
             required=True,
-            help="Camera rtsp url substream index main, or sub",
+            help="Camera rtsp url substream index main, sub, or ext",
         )
 
     async def get_snapshot(self) -> Path:
@@ -44,7 +44,7 @@ class Reolink(UnifiCamBase):
         url = (
             f"http://{self.args.ip}"
             f"/cgi-bin/api.cgi?cmd=Snap&channel={self.args.channel}"
-            f"&rs=6PHVjvf0UntSLbyT&user={self.args.username}"
+            f"&width=1920&height=1080&rs=0&user={self.args.username}"
             f"&password={self.args.password}"
         )
         self.logger.info(f"Grabbing snapshot: {url}")
